@@ -7,7 +7,6 @@ export const updateContact = async (filter, data, options) => {
     filter,
     data,
     (options = {
-      new: true,
       includeResultMetadata: true,
       ...options,
     }),
