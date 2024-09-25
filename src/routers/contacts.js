@@ -8,7 +8,9 @@ import validateBody from '../utils/validateBody.js';
 import isValidId from '../db/models/isValidId.js';
 import ctrlWrapper from '../utils/ctrlWrapper.js';
 
+import authenticate from '../middlewares/authenticate.js';
 const contactRouter = Router();
+contactRouter.use(authenticate);
 
 contactRouter.get('/', ctrlWrapper(contactController.getAllContactsController));
 

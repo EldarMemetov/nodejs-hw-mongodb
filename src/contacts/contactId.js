@@ -1,6 +1,6 @@
 import ContactCollection from '../db/models/Contact.js';
 
-export const getContactById = (id) => ContactCollection.findById(id);
+export const getContactById = (filter) => ContactCollection.findById(filter);
 
 export const updateContact = async (filter, data, options) => {
   const rawResult = await ContactCollection.findByIdAndUpdate(
@@ -11,6 +11,7 @@ export const updateContact = async (filter, data, options) => {
       ...options,
     }),
   );
+
   if (!rawResult || !rawResult.value) return null;
   return {
     data: rawResult.value,
