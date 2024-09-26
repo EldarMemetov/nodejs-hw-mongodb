@@ -1,7 +1,5 @@
 import ContactCollection from '../db/models/Contact.js';
 
-export const getContactById = (filter) => ContactCollection.findById(filter);
-
 export const updateContact = async (filter, data, options) => {
   const rawResult = await ContactCollection.findByIdAndUpdate(
     filter,
@@ -18,6 +16,9 @@ export const updateContact = async (filter, data, options) => {
     isNew: Boolean(rawResult.lastErrorObject?.upserted),
   };
 };
-
+export const getContactById = (filter) => ContactCollection.findById(filter);
+export const createContact = (payload) => ContactCollection.create(payload);
 export const deleteContact = (filter) =>
   ContactCollection.findOneAndDelete(filter);
+
+// findByIdAndUpdate
