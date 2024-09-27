@@ -16,9 +16,13 @@ export const updateContact = async (filter, data, options) => {
     isNew: Boolean(rawResult.lastErrorObject?.upserted),
   };
 };
-export const getContactById = (filter) => ContactCollection.findById(filter);
-export const createContact = (payload) => ContactCollection.create(payload);
-export const deleteContact = (filter) =>
-  ContactCollection.findOneAndDelete(filter);
+export const getContactById = (filter) =>
+  ContactCollection.findOne({ _id: filter._id, userId: filter.userId });
 
-// findByIdAndUpdate
+export const createContact = (payload) => ContactCollection.create(payload);
+
+export const deleteContact = (filter) =>
+  ContactCollection.findOneAndDelete({
+    _id: filter._id,
+    userId: filter.userId,
+  });
