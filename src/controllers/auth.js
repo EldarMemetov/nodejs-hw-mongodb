@@ -1,4 +1,5 @@
 import * as authServices from '../contacts/auth.js';
+import { resetPassword } from '../contacts/auth.js';
 
 const setupSession = (res, session) => {
   res.cookie('refreshToken', session.refreshToken, {
@@ -64,4 +65,37 @@ export const signoutController = async (req, res) => {
   res.clearCookie('refreshToken');
 
   res.status(204).send();
+};
+
+export const requestResetEmailController = async (req, res) => {
+  const { email } = req.body;
+
+  try {
+    await authServices.requestResetToken(email);
+
+    res.json({
+      status: 200,
+      message: 'Reset password email has been successfully sent.',
+      data: {},
+    });
+  } catch (error) {
+    if (error.status) {
+      res.status(error.status).json({ message: error.message });
+    } else {
+      console.error('Error sending email:', error);
+      res.status(500).json({
+        message: 'Failed to send the email, please try again later.',
+      });
+    }
+  }
+};
+
+export const resetPasswordController = async (req, res) => {
+  await resetPassword(req.body);
+
+  res.json({
+    message: 'Password was successfully reset!',
+    status: 200,
+    data: {},
+  });
 };
