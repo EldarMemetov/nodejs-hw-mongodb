@@ -106,10 +106,22 @@ export const patchContactController = async (req, res) => {
     throw createHttpError(404, `Contact with id=${id} not found`);
   }
 
+  const filteredData = {
+    _id: result._id,
+    name: result.name,
+    phoneNumber: result.phoneNumber,
+    isFavourite: result.isFavourite,
+    contactType: result.contactType,
+    userId: result.userId,
+    photo: result.photo,
+    createdAt: result.createdAt,
+    updatedAt: result.updatedAt,
+  };
+
   res.json({
     status: 200,
     message: 'Successfully patched a contact!',
-    data: result.data,
+    data: filteredData,
   });
 };
 
