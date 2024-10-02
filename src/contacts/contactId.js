@@ -1,21 +1,20 @@
 import ContactCollection from '../db/models/Contact.js';
 
-export const updateContact = async (filter, data, options) => {
-  const rawResult = await ContactCollection.findOneAndUpdate(
+export const updateContact = async (filter, data, options = {}) => {
+  const updatedContact = await ContactCollection.findOneAndUpdate(
     { _id: filter._id, userId: filter.userId },
     data,
     {
       new: true,
-      includeResultMetadata: true,
       ...options,
     },
   );
 
-  if (!rawResult) return null;
+  if (!updatedContact) return null;
 
   return {
-    data: rawResult,
-    isNew: Boolean(rawResult.lastErrorObject?.upserted),
+    data: updatedContact,
+    isNew: false,
   };
 };
 
