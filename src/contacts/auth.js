@@ -17,7 +17,7 @@ import {
   accessTokenLifetime,
   refreshTokenLifetime,
 } from '../constants/users.js';
-import { validateCode } from '../utils/googleOauth2.js';
+import { validateCode } from '../utils/googleOAuth.js';
 
 const createSession = () => {
   const accessToken = randomBytes(30).toString('base64');
