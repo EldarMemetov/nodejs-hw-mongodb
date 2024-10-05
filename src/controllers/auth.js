@@ -1,6 +1,6 @@
 import * as authServices from '../contacts/auth.js';
 import { resetPassword } from '../contacts/auth.js';
-import { generateGoogleOAuthUrl } from '../utils/googleOauth2.js';
+import { generateGoogleOAuthUrl } from '../utils/googleOAuth.js';
 
 const setupSession = (res, session) => {
   res.cookie('refreshToken', session.refreshToken, {
