@@ -2,7 +2,11 @@ import { Router } from 'express';
 import validateBody from '../utils/validateBody.js';
 import ctrlWrapper from '../utils/ctrlWrapper.js';
 import * as authControllers from '../controllers/auth.js';
-import { userSigninSchema, userSignupSchema } from '../validation/users.js';
+import {
+  userLoginWithGoogleOAuthSchema,
+  userSigninSchema,
+  userSignupSchema,
+} from '../validation/users.js';
 
 import { requestResetEmailSchema } from '../validation/mail.js';
 
@@ -36,6 +40,17 @@ authRouter.post(
   '/reset-pwd',
   validateBody(resetPasswordSchema),
   ctrlWrapper(authControllers.resetPasswordController),
+);
+
+authRouter.get(
+  '/google-oauth-url',
+  ctrlWrapper(authControllers.getGoogleOthControllers),
+);
+
+authRouter.post(
+  '/confirm-google',
+  validateBody(userLoginWithGoogleOAuthSchema),
+  ctrlWrapper(authControllers.userLoginWithGoogleOAuthControllers),
 );
 
 export default authRouter;

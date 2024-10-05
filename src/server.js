@@ -15,6 +15,7 @@ import logger from './middlewares/logger.js';
 import authRouter from './routers/auth.js';
 
 import cookieParser from 'cookie-parser';
+import swaggerDocs from './middlewares/swaggerDocs.js';
 
 export const setupServer = () => {
   const app = express();
@@ -26,6 +27,7 @@ export const setupServer = () => {
 
   app.use('/auth', authRouter);
   app.use('/contacts', contactRouter);
+  app.use('/api-docs', swaggerDocs());
 
   app.use(notFoundHandler);
 
