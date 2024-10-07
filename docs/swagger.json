@@ -196,7 +196,6 @@
                 "required": [
                   "name",
                   "phoneNumber",
-                  "isFavourite",
                   "contactType"
                 ],
                 "properties": {
@@ -504,7 +503,6 @@
         "required": [
           "name",
           "phoneNumber",
-          "isFavourite",
           "contactType"
         ],
         "properties": {
